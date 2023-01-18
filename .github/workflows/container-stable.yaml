@@ -41,7 +41,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/${{ env.GITHUB_REPOSITORY }}:stable
+            ghcr.io/${{ github.action_repository }}:stable
           labels: |
             action_id=${{ github.action }}
             action_link=${{ env.LINK }}
