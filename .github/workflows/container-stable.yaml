@@ -33,9 +33,9 @@ jobs:
           password: ${{ secrets.CR_PAT }}
 
       - name: Debug
-        run:
-          - echo ${{ env.GITHUB_ACTION_REPOSITORY }}
-          - env
+        run: |
+          echo ${{ env.GITHUB_ACTION_REPOSITORY }}
+          env
       - name: Build
         uses: docker/build-push-action@v2
         with:
