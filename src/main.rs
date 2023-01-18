@@ -11,9 +11,9 @@ use std::{
     process::exit,
 };
 
-/// Check you helm releaseas managed by Argo
+/// Maybe not that clever, but at least not dumb. Download binaries for defferent architectures easier
 #[derive(Parser)]
-#[clap(author = "allanger <allanger@zohomail.com>", version, about, long_about = None)]
+#[clap(author = "allanger <allanger@zohomail.com>", version, about, long_about = None, arg_required_else_help(true))]
 struct Args {
     /// A templated link for downloading
     #[clap(short, long, env = "CLIN_LINK")]
