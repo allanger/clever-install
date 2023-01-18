@@ -5,8 +5,6 @@ on:
   push:
     branches:
       - main
-        #    paths:
-        #      - "src/**"
 
 jobs:
   containerization:
@@ -43,8 +41,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/allanger/${{ env.GITHUB_REPOSITORY }}:stable
-            ghcr.io/allanger/${{ env.GITHUB_REPOSITORY }}:latest
+            ghcr.io/${{ env.GITHUB_ACTION_REPOSITORY }}:stable
           labels: |
             action_id=${{ github.action }}
             action_link=${{ env.LINK }}
