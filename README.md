@@ -1,5 +1,4 @@
-# Clever Install (clin)
-> It's actually not and installer, but a downloader, clin just sounds better than cldow IMHO
+# Dumb Downloader (dudo)
 
 # What's it about?
 It's just a tool to make downloading binaries for different platforms easier. 
@@ -33,15 +32,15 @@ Prebuilt binaries exist for **Linux x86_64** and **MacOS arm64** and **x86_64**
 
 Don't forget to add the binary to $PATH
 ```
-$ curl https://raw.githubusercontent.com/allanger/clever-install/main/scripts/download_clin.sh | bash
-$ clin -h
+$ curl https://raw.githubusercontent.com/allanger/clever-install/main/scripts/download_dudo.sh | bash
+$ dudo -h
 ```
 ### Docker
 
 You can use the `latest` or a `tagged` docker image
 ```
 $ docker pull ghcr.io/allanger/clever-install:latest
-$ docker run ghcr.io/allanger/clever-install:latest clin -h
+$ docker run ghcr.io/allanger/clever-install:latest dudo -h
 ```
 
 ### Build from source

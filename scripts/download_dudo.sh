@@ -36,15 +36,15 @@ esac
 LATEST_VERSION="v$(curl -s https://raw.githubusercontent.com/allanger/clever-install/main/Cargo.toml | awk -F ' = ' '$1 ~ /version/ { gsub(/[\"]/, "", $2); printf("%s",$2); exit}')"
 echo "Downloading $LATEST_VERSION"
 
-RELEASE_NAME=clin-$LATEST_VERSION-$TARGET
+RELEASE_NAME=dudo-$LATEST_VERSION-$TARGET
 RELEASE_URL="https://github.com/allanger/clever-install/releases/download/$LATEST_VERSION/$RELEASE_NAME"
 echo "Link for downloading: $RELEASE_URL"
 curl -LJO $RELEASE_URL
 
-mv $RELEASE_NAME clin
-chmod +x clin
+mv $RELEASE_NAME dudo
+chmod +x dudo
 
-echo 'Make sure that clin is in your $PATH'
+echo 'Make sure that dudo is in your $PATH'
 echo 'Try: '
 echo ' $ export PATH=$PATH:$PWD'
-echo ' $ clin -h'
+echo ' $ dudo -h'
