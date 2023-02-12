@@ -1,0 +1,9 @@
+FROM debian:stable
+COPY ./target/release/dudo /bin/dudo
+RUN apt-get update &&\
+                apt-get install openssl ca-certificates &&\
+                apt-get clean
+RUN chmod +x /bin/dudo
+WORKDIR /workdir
+ENTRYPOINT ["/bin/dudo"]
+
