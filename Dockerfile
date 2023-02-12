@@ -1,13 +1,16 @@
-FROM rust:1.66.1-alpine3.17 as builder
+FROM rust:1.67.1-slim-buster as builder
 WORKDIR /src
-RUN apk update && apk add --no-cache libressl-dev musl-dev gcc
+RUN apt-get update &&\
+		apt-get install -y libssl-dev gcc musl pkg-config
 COPY ./ .
 RUN cargo build --release
 
 
-FROM alpine:3.17.1
+FROM debian:stable
 COPY --from=builder /src/target/release/dudo /bin/dudo
-RUN apk update && apk add --no-cache libressl-dev libc6-compat
+RUN apt-get update &&\
+		apt-get install openssl ca-certificates &&\
+		apt-get clean
 RUN chmod +x /bin/dudo
 WORKDIR /workdir
 ENTRYPOINT ["/bin/dudo"]
