@@ -3,8 +3,8 @@ name: "Stable container"
 
 on:
   push:
-    # branches:
-      # - main
+    branches:
+      - main
 
 jobs:
   containerization:

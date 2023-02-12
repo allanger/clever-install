@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build-${{matrix.target}}
-          path: ${{  github.workspace  }}/target/${{ matrix.target }}/release/clin
+          path: ${{  github.workspace  }}/target/${{ matrix.target }}/release/dudo
 
   release:
     needs: build
