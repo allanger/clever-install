@@ -1,6 +1,6 @@
 use clap::Parser;
 use handlebars::Handlebars;
-use http::{StatusCode};
+use http::StatusCode;
 use log::{error, info};
 use serde::{Deserialize, Serialize};
 
