@@ -47,6 +47,7 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ github.repository }}:${{ env.TAG }}
+            ghcr.io/${{ github.repository }}:stable
           labels: |
             action_id=${{ github.action }}
             action_link=${{ env.LINK }}

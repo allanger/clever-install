@@ -50,7 +50,7 @@ jobs:
         uses: actions/download-artifact@v3
 
       - name: Set version variable
-        run: echo "CLIN_VERSION=${GITHUB_REF##*/}" >> $GITHUB_ENV
+        run: echo "VERSION=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
       - name: Rename release to avoid name conflict
         run: ./scripts/rename_releases.sh

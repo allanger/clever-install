@@ -1,5 +1,5 @@
 ---
-name: "Stable container"
+name: "Latest container"
 
 on:
   push:
@@ -43,7 +43,6 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}:stable
             ghcr.io/${{ github.repository }}:latest
           labels: |
             action_id=${{ github.action }}
