@@ -3,7 +3,8 @@ WORKDIR /src
 RUN apt-get update &&\
 		apt-get install -y libssl-dev gcc musl pkg-config
 COPY ./ .
-RUN cargo build --release
+RUN rustup default nightly && rustup update
+RUN cargo build --release --jobs 2 -Z sparse-registry
 
 
 FROM debian:stable
