@@ -1,4 +1,4 @@
-FROM rust:1.67.1-slim-buster as builder
+FROM rust:1.70.0-slim-bookworm as builder
 WORKDIR /src
 RUN apt-get update &&\
 		apt-get install -y libssl-dev gcc musl pkg-config
