@@ -1,0 +1,52 @@
+---
+name: "Build container"
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*.*.*"
+
+
+jobs:
+  containerization:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+          - arch: arm64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Install buildah
+        run: sudo apt update && sudo apt install -y podman buildah qemu-user-static
+
+      - name: Set version tag (only if triggered by pushing a tag)
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: echo "TAG=${GITHUB_REF##*/}" >> $GITHUB_ENV
+
+      - name: Set latest tag (only if triggered by pushing to the main branch)
+        if: github.ref == 'main'
+        run: echo "TAG=latest" >> $GITHUB_ENV
+      
+      - name: Set action link variable
+        run: echo "LINK=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_ENV
+
+      - name: Login in gchr registry
+        run: buildah login --username ${{ github.repository_owner }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
+
+      - name: Build an image
+        run: |
+          buildah bud -t ghcr.io/${{ github.repository }}:${{ github.sha }}-${{ matrix.arch }} \
+            --label action_id=${{ github.action }} \
+            --label action_link=${{ env.LINK }} \
+            --label actor=${{ github.actor }} \
+            --label sha=${{ github.sha }} \
+            --label ref=${{ github.ref }} \
+            .
