@@ -10,8 +10,8 @@ RUN cargo build --release --jobs 2 -Z sparse-registry
 FROM debian:stable
 COPY --from=builder /src/target/release/dudo /bin/dudo
 RUN apt-get update &&\
-		apt-get install openssl ca-certificates &&\
-		apt-get clean
+		apt-get install -y openssl ca-certificates &&\
+		apt-get clean -y
 RUN chmod +x /bin/dudo
 WORKDIR /workdir
 ENTRYPOINT ["/bin/dudo"]
