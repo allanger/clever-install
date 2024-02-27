@@ -1,6 +1,5 @@
 use clap::Parser;
 use handlebars::Handlebars;
-use http::StatusCode;
 use log::{error, info};
 use serde::{Deserialize, Serialize};
 
@@ -119,8 +118,8 @@ fn main() {
     };
 
     info!("Running on {} {}", OS, ARCH);
-    let oss = config.os.get(&OS.clone().to_string()).unwrap();
-    let archs = config.arch.get(&ARCH.clone().to_string()).unwrap();
+    let oss = config.os.get(&OS.to_string()).unwrap();
+    let archs = config.arch.get(&ARCH.to_string()).unwrap();
 
     for arch in archs {
         for os in oss {
@@ -134,7 +133,7 @@ fn main() {
             let link = reg.render("download_link", &values).unwrap();
             info!("Trying to download from {}", link.clone());
             let mut resp = reqwest::blocking::get(link).unwrap();
-            if resp.status() == StatusCode::OK {
+            if resp.status().is_success() {
                 info!("Response is 200, I'll try to download");
                 let mut out =
                     File::create(args.download_path.clone()).expect("failed to create file");
